@@ -2,19 +2,62 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <title>Pilih Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Just-Create-World</title>
 
-  <!-- Tambahkan baris ini -->
-  <base href="/my-games/">
+  <!-- BASE HREF supaya path absolut /images, /js, dll diarahkan ke folder repo -->
+  <base href="/Just-Create-World/">
 
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      text-align: center;
+    }
+    h1 { margin-top: 2rem; }
+    p  { opacity: .8; }
+    .games {
+      margin: 3rem auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      padding: 0 1rem;
+    }
+    a {
+      display: block;
+      padding: 1.5rem;
+      background: #1f1f1f;
+      border-radius: 12px;
+      color: #f0f0f0;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: background 0.2s;
+    }
+    a:hover { background: #333; }
+    footer {
+      margin: 4rem 0 2rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
 </head>
 <body>
-  <h1>Selamat Datang</h1>
-  <ul>
-    <li><a href="game1/index.html">Game 1</a></li>
-    <li><a href="game2/index.html">Game 2</a></li>
-    <li><a href="game3/index.html">Game 3</a></li>
-  </ul>
+
+  <h1>Selamat Datang di Just-Create-World</h1>
+  <p>Pilih salah satu game:</p>
+
+  <div class="games">
+    <a href="racing/index.html">🚗 Racing</a>
+    <a href="flappy/index.html">🐤 Flappy</a>
+    <a href="horse/index.html">🏇 Horse</a>
+  </div>
+
+  <footer>
+    &copy; 2025 Just-Create-World
+  </footer>
+
 </body>
 </html>
