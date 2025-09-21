@@ -1,121 +1,158 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Just Create World</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Just Create World — Creator Contest</title>
   <style>
     :root {
-      --bg1:#0f5fff;
-      --bg2:#00d0ff;
-      --bg3:#8efc7a;
-      --glass: rgba(255,255,255,.16);
-      --glass-border: rgba(255,255,255,.28);
-      --tile-size: min(28vw,28vh);
-      --radius:18px;
+      --bg:#0f0f14; --card:#151821; --ink:#e9eef9; --muted:#aeb7c8;
+      --accent:#5dd0ff; --accent-ink:#06141f; --ring:#2a3142;
+      --radius:16px;
     }
-
-    html,body {
-      height:100dvh;
+    * { box-sizing:border-box }
+    html,body{height:100%}
+    body {
       margin:0;
-      overflow:hidden;
-      background: linear-gradient(135deg,var(--bg1),var(--bg2) 55%,var(--bg3));
-      font-family: system-ui, sans-serif;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
+      background:var(--bg);
+      color:var(--ink);
+      font:16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans";
     }
-
-    h1 {
-      font-size:clamp(1.8rem,4vw,2.6rem);
-      margin:0 0 30px;
-      letter-spacing:.5px;
-      text-shadow:0 2px 6px rgba(0,0,0,.25);
+    header {
+      max-width:1100px; margin:24px auto 0; padding:0 16px;
+      display:flex; align-items:center; justify-content:space-between;
     }
-
-    .cards {
-      display:grid;
-      grid-template-columns:repeat(3,var(--tile-size));
-      gap:20px;
-      justify-content:center;
-      align-items:center;
+    .brand { font-weight:700; letter-spacing:.3px }
+    .brand b { color:var(--accent) }
+    .socials { display:flex; gap:12px; align-items:center }
+    .socials a {
+      display:inline-flex; justify-content:center; align-items:center;
+      width:36px; height:36px;
+      background:var(--card); border-radius:50%;
+      color:var(--ink); text-decoration:none;
+      border:1px solid var(--ring); font-size:1.2rem;
+      transition:background .2s;
     }
-
+    .socials a:hover { background:var(--accent); color:var(--accent-ink) }
+    main { max-width:1100px; margin:18px auto 48px; padding:0 16px }
+    .intro {
+      text-align:center; max-width:800px; margin:2rem auto 3rem;
+    }
+    .intro h1 { font-size:2rem; margin-bottom:.3rem }
+    .intro p { color:var(--muted); margin:0 }
+    .grid {
+      display:grid; gap:20px;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    }
     .card {
-      width:var(--tile-size);
-      height:var(--tile-size);
-      background:var(--glass);
-      border:1px solid var(--glass-border);
-      backdrop-filter: blur(14px) saturate(140%);
-      border-radius:var(--radius);
-      box-shadow:0 8px 32px rgba(0,0,0,.25);
-      overflow:hidden;
-      position:relative;
-      transition:transform .15s ease, box-shadow .15s ease;
+      position:relative; border-radius:var(--radius);
+      background:var(--card); border:1px solid var(--ring);
+      overflow:hidden; isolation:isolate;
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
     .card:hover {
-      transform:translateY(-4px);
-      box-shadow:0 12px 40px rgba(0,0,0,.3);
+      transform:translateY(-2px);
+      border-color:color-mix(in oklab,var(--accent) 50%,var(--ring));
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
     }
-
-    .thumb,
-    .thumb video {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+    .poster { aspect-ratio:3/4; width:100%; background:#0b0e14; display:block; overflow:hidden }
+    .poster img { width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.02); transition:transform .5s ease }
+    .card:hover .poster img { transform:scale(1.03) }
+    .body { padding:14px 14px 16px }
+    .title { font-size:1.05rem; font-weight:700; margin:0 0 4px }
+    .meta { color:var(--muted); font-size:.92rem; margin:0 0 12px }
+    .play {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:12px;
+      background:var(--accent); color:var(--accent-ink);
+      font-weight:700; text-decoration:none; outline:0;
+      transition:filter .15s ease, transform .15s ease;
     }
-
-    .label {
-      position:absolute;
-      bottom:12px;
-      left:50%;
-      transform:translateX(-50%);
-      background:rgba(0,0,0,.55);
-      padding:6px 12px;
-      border-radius:12px;
-      font-size:.9rem;
-      border:1px solid rgba(255,255,255,.25);
-      backdrop-filter:blur(4px);
+    .play:hover { filter:brightness(1.06); transform:translateY(-1px) }
+    footer {
+      max-width:1100px; margin:40px auto 20px;
+      padding:0 16px; color:var(--muted); text-align:center;
     }
-
-    @media (max-width:640px){
-      :root{ --tile-size: 26vw; }
-      .cards { grid-template-columns:repeat(3,var(--tile-size)); gap:12px; }
+    .token {
+      margin-top:8px;
+      display:inline-block;
+      padding:10px 16px;
+      background:var(--accent); color:var(--accent-ink);
+      font-weight:700; border-radius:12px;
+      text-decoration:none;
     }
   </style>
 </head>
 <body>
 
-  <h1>Just Create World</h1>
-
-  <div class="cards">
-    <a class="card" href="racing/">
-      <video class="thumb" src="media/racing.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      <span class="label">Racing</span>
-    </a>
-
-    <a class="card" href="flappy/">
-      <video class="thumb" src="media/flappy.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      <span class="label">Flappy</span>
-    </a>
-
-    <a class="card" href="horse/">
-      <video class="thumb" src="media/horse.mp4" autoplay muted loop playsinline preload="metadata"></video>
-      <span class="label">Horse</span>
+<header>
+  <div class="brand">JUST <b>CREATE</b> WORLD</div>
+  <div class="socials">
+    <a href="https://x.com/CreatorDev_Sol" target="_blank" aria-label="Creator Coin on Twitter">
+      🐦
     </a>
   </div>
+</header>
 
-  <script>
-    // Pause preview saat tidak terlihat (hemat baterai)
-    const vids=[...document.querySelectorAll('video')];
-    const io=new IntersectionObserver(es=>{
-      es.forEach(e=> e.isIntersecting ? e.target.play().catch(()=>{}):e.target.pause());
-    },{threshold:.2});
-    vids.forEach(v=>io.observe(v));
-  </script>
+<main>
+  <section class="intro">
+    <h1>Creator Contest</h1>
+    <p>
+      A reward program by <strong>Creator Coin</strong> — tagline <em>“Just Create”</em>.
+      Every time an artist gets a retweet, Creator Coin sends <b>1&nbsp;SOL</b> as a prize.<br>
+      <br>
+      Dedicated to the <strong>Creator Community</strong>.
+    </p>
+    <p>
+      Support the movement: <br>
+      <a class="token" href="https://pump.fun/4ZFHpmXteZs9cGao87L3qkJzRBxeziesgphhpLvLpump" target="_blank">
+        Buy $CREATOR
+      </a>
+    </p>
+  </section>
+
+  <section class="grid" aria-label="Games list">
+    <!-- Racing -->
+    <article class="card">
+      <a class="poster" href="racing/" aria-label="Play Racing">
+        <img src="racing/poster.jpg" alt="Racing poster" loading="lazy" />
+      </a>
+      <div class="body">
+        <h3 class="title">Racing</h3>
+        <p class="meta">Fast-paced arcade racing — dodge obstacles and reach the finish line.</p>
+        <a class="play" href="racing/">▶ Play</a>
+      </div>
+    </article>
+
+    <!-- Flappy -->
+    <article class="card">
+      <a class="poster" href="flappy/" aria-label="Play Flappy">
+        <img src="flappy/poster.jpg" alt="Flappy poster" loading="lazy" />
+      </a>
+      <div class="body">
+        <h3 class="title">Flappy</h3>
+        <p class="meta">Timing is everything — tap to fly between pipes.</p>
+        <a class="play" href="flappy/">▶ Play</a>
+      </div>
+    </article>
+
+    <!-- Horse -->
+    <article class="card">
+      <a class="poster" href="horse/" aria-label="Play Horse">
+        <img src="horse/poster.jpg" alt="Horse poster" loading="lazy" />
+      </a>
+      <div class="body">
+        <h3 class="title">Horse</h3>
+        <p class="meta">Bet on racing horses — plan your strategy and win!</p>
+        <a class="play" href="horse/">▶ Play</a>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>
+  © 2025 Just Create World • A project for the Creator Community
+</footer>
 
 </body>
 </html>
