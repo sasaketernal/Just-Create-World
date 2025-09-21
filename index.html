@@ -4,60 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Just-Create-World</title>
-
-  <!-- BASE HREF supaya path absolut /images, /js, dll diarahkan ke folder repo -->
-  <base href="/Just-Create-World/">
-
+  <!-- <base href="/">  <-- opsional; boleh dihapus juga -->
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      background: #121212;
-      color: #f0f0f0;
-      text-align: center;
-    }
-    h1 { margin-top: 2rem; }
-    p  { opacity: .8; }
-    .games {
-      margin: 3rem auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      max-width: 800px;
-      padding: 0 1rem;
-    }
-    a {
-      display: block;
-      padding: 1.5rem;
-      background: #1f1f1f;
-      border-radius: 12px;
-      color: #f0f0f0;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: background 0.2s;
-    }
-    a:hover { background: #333; }
-    footer {
-      margin: 4rem 0 2rem;
-      font-size: 0.9rem;
-      opacity: 0.7;
-    }
+    body{margin:0;font-family:system-ui,sans-serif;background:#121212;color:#f0f0f0;text-align:center}
+    h1{margin-top:2rem}
+    .games{margin:3rem auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;max-width:800px;padding:0 1rem}
+    a{display:block;padding:1.5rem;background:#1f1f1f;border-radius:12px;color:#f0f0f0;text-decoration:none;font-size:1.2rem}
+    a:hover{background:#333}
   </style>
 </head>
 <body>
-
   <h1>Selamat Datang di Just-Create-World</h1>
-  <p>Pilih salah satu game:</p>
-
+  <p>Pilih game:</p>
   <div class="games">
-    <a href="racing/index.html">🚗 Racing</a>
-    <a href="flappy/index.html">🐤 Flappy</a>
-    <a href="horse/index.html">🏇 Horse</a>
+    <a href="racing/">🚗 Racing</a>
+    <a href="flappy/">🐤 Flappy</a>
+    <a href="horse/">🏇 Horse</a>
   </div>
-
-  <footer>
-    &copy; 2025 Just-Create-World
-  </footer>
-
 </body>
 </html>
